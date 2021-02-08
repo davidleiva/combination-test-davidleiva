@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Grid, Typography, Box } from '@material-ui/core';
+import { default as UserCard } from './components/Logic/Card';
+
+import useLoggedUser from './hooks/useLoggedUser';
 
 function App() {
+  const loggedUser = useLoggedUser();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      style={{height: '100vh'}}
+    > 
+      <Box m={2}>
+        <Typography>This is just a Card Example:</Typography>
+      </Box>
+      <Box m={4}>
+        <UserCard data={loggedUser} />
+      </Box>
+      <Typography m={2}>Please, take a closer look into StoryBook</Typography>
+      <Typography m={2}><code>npm run storybook</code></Typography>
+    </Grid>
   );
 }
 
