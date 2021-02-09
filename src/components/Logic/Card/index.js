@@ -20,8 +20,11 @@ import CommentsSummary from '../../UI/CommentsSummary';
 
 // utils
 import PropTypes from 'prop-types';
-import './styles.css';
+import './styles.scss';
 import { makeStyles } from '@material-ui/core/styles';
+
+// assets 
+import headerbackground from '../../assets/header.png';
 
 const useStyles = makeStyles(() => ({
     media: {
@@ -31,13 +34,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 const CardUI = ({data}) => {
+    const paragraph = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mollis malesuada nunc, nec elementum lectus vehicula at. Sed a tristique mi, non cursus magna. Duis auctor rutrum velit, eget tincidunt leo tincidunt tempus. Cras arcu dolor, fringilla in sapien laoreet, eleifend efficitur lacus. Vestibulum mattis aliquam porta.'
+
     const fullName = data && data.name ? `${data.name.title} ${data.name.first} ${data.name.last}` : '';    
     const address = data && data.location ? `${data.location.street.number} ${data.location.street.name}, ${data.location.city}, ${data.location.country}`: null;
     
     const [registeredDate, setRegisteredDate] = useState('');
-
     const getRegisteredDate = (date) => {
-        return <span key="2">{date.getDate() + "/" + date.getMonth() + 1 + "/" + date.getFullYear()}</span>
+        const month = date.getMonth() + 1;
+        return <span className="is-uppercase" key="2"><small>{date.getDate() + "/" + month + "/" + date.getFullYear()}</small></span>
     };
 
     useEffect(() => {
@@ -50,6 +55,12 @@ const CardUI = ({data}) => {
     return (
         <Card className="Card">
             <CardContent>
+                <CardMedia
+                    className={classes.media}
+                    image={headerbackground}
+                    title="header background image"
+                >
+                </CardMedia>
                 <CardHeader
                     avatar={
                         <Avatar
@@ -65,17 +76,15 @@ const CardUI = ({data}) => {
                         </IconButton>
                     }
                     title={<h3 style={{margin: '0'}}>{fullName}</h3>}
-                    subheader={[<strong key={'1'}>Registered at: </strong>, registeredDate]}
+                    subheader={[<span className="is-uppercase" key={'1'}><small>Registered at: </small></span>, registeredDate]}
                 ></CardHeader>
-                <CardMedia
-                    className={classes.media}
-                    image="https://picsum.photos/584/194"
-                    title="Live from space album cover"
-                >
-                </CardMedia>
+
                 <div style={{
                     padding: '10px'
                 }}>
+                    <Box display="flex" className="wrap nowrap-md">
+                        <CardTextItem text={paragraph}  />
+                    </Box>
                     <Box display="flex" className="wrap nowrap-md">
                         <CardTextItem text={data.email} iconString={'email'} className="col-6-md"/>
                         <CardTextItem text={data.phone} iconString={'phone'} className="col-6-md"/>

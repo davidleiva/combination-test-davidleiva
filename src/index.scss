@@ -1,5 +1,9 @@
+@import '../node_modules/bulma/sass/helpers/typography.sass';
+
+$c-grey-1: #E5E5E5;
+
 body {
-  background: #ececec;
+  background-color: $c-grey-1;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
